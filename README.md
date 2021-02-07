@@ -26,7 +26,7 @@ It may be a good idea to install transformers package (and Pytorch) in a virtual
 
 ### Usage for the player 
 
-* In a terminal ```python TransformerQuest.py```.
+* In a terminal ```python transformerquest.py```.
 
 You will be prompted for a question, you can ask any question (Who are you?, What do you hide?, What do you like?, etc...)
 You can also write another thing than a question, the character will answer, but the answer may be less informative.
