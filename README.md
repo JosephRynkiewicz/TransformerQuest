@@ -20,7 +20,7 @@ It may be a good idea to install transformers package (and Pytorch) in a virtual
 
 * After installing Pytorch et the transformers packages, you can clone the repository with git, but to copy the file transformerQuest.py in a directory and put the narratives files in a subdirectory "data" will be enough.
 
-* Notebook versions for Google Colab of Kaggle kernels are also available.
+* You can run this script in a Kaggle kernel if you adapt the name of the data directory.
 
 * If a GPU is detected, it will be used by the generative transformer (gtp2-xl), if your GPU is not big enough, you may have to change the GPT2 model to a smaller one (like gpt2-medium or gpt2) at the beginning of the script.
 
