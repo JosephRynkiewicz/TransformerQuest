@@ -103,7 +103,8 @@ def ask_enigma(first_sentence="Hello, the Dark Knight is listening!\n", PADDING_
         elif re.search(r"\bno\b",quest.lower()):
                 break           
         else:
-            prompt="Well, what to say."
+            prompt=quest
+            PADDING_TEXT=PADDING_TEXT+prompt
         pad_length=len(PADDING_TEXT)
         inputs = tokenizer.encode(PADDING_TEXT + prompt, add_special_tokens=False, return_tensors="pt", verbose=False)
         inputs = inputs.to(device)
