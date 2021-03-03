@@ -7,6 +7,7 @@ import os
 
 #Adapt to your case 
 path ="data/"
+story="amelie/" #story contains the name of the dir to use this run. The story of the dark knight is in "default/"
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -14,8 +15,8 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 tokenizerqa = AutoTokenizer.from_pretrained("distilbert-base-uncased-distilled-squad")
 modelqa = AutoModelForQuestionAnswering.from_pretrained("distilbert-base-uncased-distilled-squad")
-tokenizer = AutoTokenizer.from_pretrained("gpt2-large")
-model = AutoModelForCausalLM.from_pretrained("gpt2-large")
+tokenizer = AutoTokenizer.from_pretrained("gpt2") #Don't forget to change according to your needs
+model = AutoModelForCausalLM.from_pretrained("gpt2")
 
 
 model = model.to(device)
@@ -26,7 +27,7 @@ model.config.pad_token_id = model.config.eos_token_id
 
 def cut_trailing_quotes(text):
     num_quotes = text.count('"')
-    if num_quotes % 2 is 0:
+    if num_quotes % 2 == 0:
         return text
     else:
         final_ind = text.rfind('"')
@@ -69,8 +70,8 @@ def capitalize_first_letters(text):
 
 #Read narrative file with the format described in the README
 
-def read_narrative(namefile="narrative1.txt"):
-    filenar = open(path+namefile)
+def read_narrative(namefile="narrative1.txt"): 
+    filenar = open(path+story+namefile)
     READEN_TEXT = filenar.readlines()
     filenar.close()
     first_sentence = READEN_TEXT[0]
@@ -174,7 +175,7 @@ def run_round(first_sentence="Hello", PADDING_TEXT="Hello", second_sentence="\nW
 
 #Read all the files in the directory data and sort them by alphabetical order
 
-all_files = sorted(os.listdir(path))
+all_files = sorted(os.listdir(path+story))
 for namefile in all_files[0:-1]:
     first_sentence, PADDING_TEXT, second_sentence, keyword, last_sentence=read_narrative(namefile)
     run_round(first_sentence=first_sentence, PADDING_TEXT=PADDING_TEXT, second_sentence=second_sentence[0:-1], keyword=keyword[0:-1], endprompt=last_sentence)
