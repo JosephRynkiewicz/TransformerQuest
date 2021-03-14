@@ -106,6 +106,8 @@ def ask_enigma(first_sentence="Hello, the Dark Knight is listening!\n", PADDING_
         else:
             prompt=quest
             PADDING_TEXT=PADDING_TEXT+prompt
+            prompt = ""
+        PADDING_TEXT=PADDING_TEXT+" "
         pad_length=len(PADDING_TEXT)
         inputs = tokenizer.encode(PADDING_TEXT + prompt, add_special_tokens=False, return_tensors="pt", verbose=False)
         inputs = inputs.to(device)
@@ -125,7 +127,7 @@ def ask_end(first_sentence="\nWhat will you do now? ", PADDING_TEXT="Hello", tru
     print("\n")
     if re.search(trueresponse,response.lower()):
         prompt = endprompt
-        inputs = tokenizer.encode(PADDING_TEXT + prompt, add_special_tokens=False, return_tensors="pt", verbose=False)
+        inputs = tokenizer.encode(PADDING_TEXT + " " + prompt, add_special_tokens=False, return_tensors="pt", verbose=False)
         inputs=inputs.to(device)        
         outputs = model.generate(inputs, max_length=len(inputs[0])+randint(50,150), do_sample=True, top_p=0.95, top_k=60)
         generated = tokenizer.decode(outputs[0][0:-1])[pad_length:]
@@ -147,7 +149,7 @@ def ask_final(first_sentence="Hello", PADDING_TEXT="Hello", second_sentence="\nW
     print("\n")
     trueresponse = r'\b{}\b'.format(keyword)  
     prompt = endprompt
-    inputs = tokenizer.encode(PADDING_TEXT + prompt, add_special_tokens=False, return_tensors="pt", verbose=False)
+    inputs = tokenizer.encode(PADDING_TEXT + " " + prompt, add_special_tokens=False, return_tensors="pt", verbose=False)
     inputs=inputs.to(device)
     outputs = model.generate(inputs, max_length=len(inputs[0])+randint(50,150), do_sample=True, top_p=0.95, top_k=60)
     generated = tokenizer.decode(outputs[0][0:-1])[pad_length:]
