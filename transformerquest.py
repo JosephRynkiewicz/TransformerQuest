@@ -7,7 +7,8 @@ import os
 
 #Adapt to your case 
 path ="data/"
-story="amelie/" #story contains the name of the dir to use this run. The story of the dark knight is in "default/"
+#story="amelie/" #story contains the name of the dir to use this run. The story of the dark knight is in "default/"
+story="default/"
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -15,8 +16,8 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 tokenizerqa = AutoTokenizer.from_pretrained("distilbert-base-uncased-distilled-squad")
 modelqa = AutoModelForQuestionAnswering.from_pretrained("distilbert-base-uncased-distilled-squad")
-tokenizer = AutoTokenizer.from_pretrained("gpt2") #Don't forget to change according to your needs
-model = AutoModelForCausalLM.from_pretrained("gpt2")
+tokenizer = AutoTokenizer.from_pretrained("gpt2-large") #Don't forget to change according to your needs
+model = AutoModelForCausalLM.from_pretrained("gpt2-large")
 
 
 model = model.to(device)
